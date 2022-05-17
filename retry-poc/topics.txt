@@ -1,0 +1,16 @@
+create
+
+docker exec -it broker /usr/bin/kafka-topics --create --zookeeper zookeeper:2181 --topic bcm.test.queuing.person.in --partitions 3 --replication-factor 1
+docker exec -it broker /usr/bin/kafka-topics --create --zookeeper zookeeper:2181 --topic bcm.test.queuing.person.out --partitions 3 --replication-factor 1
+
+docker exec -it broker /usr/bin/kafka-topics --create --zookeeper zookeeper:2181 --topic bcm.test.queuing.device.in --partitions 3 --replication-factor 1
+docker exec -it broker /usr/bin/kafka-topics --create --zookeeper zookeeper:2181 --topic bcm.test.queuing.device.out --partitions 3 --replication-factor 1
+
+
+delete
+
+docker exec -it broker /usr/bin/kafka-topics --delete --zookeeper zookeeper:2181 --topic=bcm.test.queuing.person.in
+docker exec -it broker /usr/bin/kafka-topics --delete --zookeeper zookeeper:2181 --topic=bcm.test.queuing.person.out
+
+docker exec -it broker /usr/bin/kafka-topics --delete --zookeeper zookeeper:2181 --topic=bcm.test.queuing.device.in
+docker exec -it broker /usr/bin/kafka-topics --delete --zookeeper zookeeper:2181 --topic=bcm.test.queuing.device.out
