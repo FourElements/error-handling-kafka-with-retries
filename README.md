@@ -47,7 +47,7 @@ Run docker-compose.yml
 Bootstrap retry-poc (running RetryApplication) and retrier (running RetrierApplication)
     
 Then to see the retries in action, send Create Person 1 without having sent a Create Device 1. Afterwards send a couple more ( changing for
- example the job name and making sure you have a **unique eventId**. Advise to use Postman {{$guid}} , eg: "eventId": "{{$guid}}" ).
+ example the job name and making sure you have a **unique eventId per sent event**. Advise to use Postman {{$guid}} , eg: "eventId": "{{$guid}}" ).
 Finally, send Create Device 1 and see all events processed properly and in the right order.  
     
 ## Useful requests:
