@@ -24,8 +24,7 @@ If Device exists, then it performs the happy path flow:
 - send a tombstone record for redirect topic to flag successful completion
 
 On the other hand, if a device still not exists, what to do?
-So the idea was to have a retry-counter for each key, stored in a topic, streamed as a GlobalKTable and having a materialized view named person
--retry-counter.\
+So the idea was to have a retry-counter for each key, stored in a topic, streamed as a GlobalKTable and having a materialized view named person-retry-counter.\
 Also, when consuming an event, if it's to be retried (due to the still missing device), then we create a Header with the key value
  pair to represent the current retry count for that specific event. 
 Therefore, the first step to take when actually consuming an event, is to verify that retry counter, and check if it exceeds the maximum amount
