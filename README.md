@@ -32,7 +32,8 @@ Therefore, the first step to take when actually consuming an event, is to verify
 - send event to DQL (this would then require operations team to verify the issue) 
 - send a tombstone record for redirect topic to clean that entry
 
-Afterwards, we still need to perform additional validation. It must validate the retry-counter header comparing with the global counter.
+If it does not exceed the maximum number of attempts, we still need to perform additional validation. It must validate the retry-counter
+ header comparing with the global counter.
 Consult the current counter value from the GlobalKTable materialized view. if the event value is inferior, increment the counter and send back the
  event to the topic (which effectively places it last). if the event value is equal, then it's in the proper order and can be processed.
 This is to guarantee that events for the same key that arrived later will still respect the order. 
