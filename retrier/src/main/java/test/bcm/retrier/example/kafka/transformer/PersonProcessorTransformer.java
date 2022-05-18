@@ -68,7 +68,7 @@ public class PersonProcessorTransformer implements Transformer<String, PersonInp
             return null; // do not forward the event down the pipeline
         }
 
-        // before trying to process the event, is must validate the retry-counter header.
+        // before trying to process the event, it must validate the retry-counter header.
         // consult the current counter value from the GlobalKTable. if the event value is inferior, increment the counter and send back the event
         // to the topic (which effectively places it last). if the event value is equal, then it's in the proper order and can be processed
         if (retryCounterHeader == null && eventCounter != null || retryCounterHeader != null && eventCounter != null && ExampleUtils.byteArrayToInt(
@@ -122,7 +122,7 @@ public class PersonProcessorTransformer implements Transformer<String, PersonInp
         log.info("--- Reached MAX Retries for key: {}  Sending to DQL", value.getId());
         dlqService.prepareAndSendEvent("bcm.test.queuing.person.in.dlq", key, value, headers);
 
-        // event was not successfully processed and reached max attempts. now its now retrier responsibility, but manual teams to verify
+        // event was not successfully processed and reached max attempts. now its not retrier responsibility, but manual teams to verify
         // so send a tombstone record for redirect topic to clean that entry
         tombstoneService.prepareAndSendEvent("bcm.test.queuing.person.in.redirect", value.getEventId(), value, headers);
     }
